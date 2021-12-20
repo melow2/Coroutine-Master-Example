@@ -1,0 +1,18 @@
+
+1. Coroutine & Regular Routine
+코루틴과 루틴의 차이점
+
+2. suspend Function
+코루틴의 서스텐드 펑션
+
+3. Cocurrent behavior without switching thread -> Lightweight thread.
+스레드 간 컨텍스트 스위칭 없이 동시에 작업을 수행할 수 있음
+
+4. Blocking vs Suspending
+블락킹과 서스펜드의 차이점
+
+5. Parts of a Coroutine can ve executed on different thread.
+코루틴도 스레드간 컨텍스트 스위칭이 가능하다.
+
+6. Concurrent vs Sequential
+동시에 vs 순서대로
