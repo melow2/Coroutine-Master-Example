@@ -1,5 +1,5 @@
+//thread{ }
 package com.john.coroutinemaster.playground.fundermentals
-
 import kotlin.concurrent.thread
 
 fun main() {

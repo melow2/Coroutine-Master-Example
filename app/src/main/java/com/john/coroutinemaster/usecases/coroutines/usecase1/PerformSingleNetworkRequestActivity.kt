@@ -21,7 +21,7 @@ class PerformSingleNetworkRequestActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        viewModel.uiState().observe(this, Observer { uiState ->
+        viewModel.uiState.observe(this, Observer { uiState ->
             if (uiState != null) {
                 render(uiState)
             }

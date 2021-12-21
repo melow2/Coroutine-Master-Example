@@ -8,8 +8,10 @@ import kotlinx.coroutines.runBlocking
 /*
  *1. suspend
  * - 일시중단하다
- * 코루틴을 사용할 때는 항상 suspend키워드를 붙여야 함.
+ * 코루틴 스콥 안에 코루틴을 사용할 때는 항상 suspend키워드를 붙여야 함.
  * 함수 앞에 붙인다 무조건 쓰여짐
+ * 코루틴 스쿱 서스펜드펑션안에서
+ *
  *
  * suspend가 붙으면 이 함수는 중단이 될 수 있는 함수
  * 그러고 중단이 되어었다가 다시 실행 될 수 있는 함수
@@ -65,4 +67,6 @@ suspend fun coroutine(number:Int, delay:Long){
  * 코루틴은 suspend function으로 실행이 된다.
  * suspend function은 suspend point(화살표)에 멈춘다
  * suspend point가 있는 부분이 코루틴이 실행된다
+ *
+ *
  */
