@@ -16,11 +16,10 @@ class RetryNetworkRequestViewModel(
 
         viewModelScope.launch {
             val numberOfRetries = 2
-            repeat(numberOfRetries){
+            retry(numberOfRetries) {
                 try {
                     loadRecentAndroidVersion()
-                    return@launch
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     Timber.e(e)
                     uiState.value = UiState.Error("Network request failed!")
                 }
@@ -28,7 +27,19 @@ class RetryNetworkRequestViewModel(
         }
     }
 
-    private suspend fun loadRecentAndroidVersion(){
+    private suspend fun <T> retry(numberOfRetries: Int, block: suspend () -> T): T {
+        repeat(numberOfRetries) {
+            try {
+                return block()
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        }
+        return block()
+    }
+
+
+    private suspend fun loadRecentAndroidVersion() {
         val recentAndroidVersions = api.getRecentAndroidVersions()
         uiState.value = UiState.Success(recentAndroidVersions)
     }
