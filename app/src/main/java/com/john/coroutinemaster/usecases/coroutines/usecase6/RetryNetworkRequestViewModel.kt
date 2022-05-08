@@ -3,6 +3,7 @@ package com.john.coroutinemaster.usecases.coroutines.usecase6
 import androidx.lifecycle.viewModelScope
 import com.john.coroutinemaster.base.BaseViewModel
 import com.john.coroutinemaster.mock.MockApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
@@ -27,14 +28,24 @@ class RetryNetworkRequestViewModel(
         }
     }
 
-    private suspend fun <T> retry(numberOfRetries: Int, block: suspend () -> T): T {
+    private suspend fun <T> retry(
+        numberOfRetries: Int,
+        initialDelayMillis: Long = 100,
+        maxDelayMillis: Long = 1000,
+        factor: Double = 2.0,
+        block: suspend () -> T
+    ): T {
+        var currentDelay = initialDelayMillis
         repeat(numberOfRetries) {
             try {
                 return block()
             } catch (e: Exception) {
                 Timber.e(e)
             }
+            delay(currentDelay)
+            currentDelay = (currentDelay * factor).toLong().coerceAtLeast(maxDelayMillis)
         }
+
         return block()
     }
 
